@@ -15,9 +15,9 @@ endif
 let loaded_javascript_syntax_checker = 1
 
 "bail if the user doesnt have jsl installed
-if !executable("jsl")
-    finish
-endif
+"if !executable("jslint")
+"    finish
+"endif
 
 if !exists("g:syntastic_jsl_conf")
     let g:syntastic_jsl_conf = ""
@@ -29,7 +29,7 @@ function! SyntaxCheckers_javascript_GetLocList()
     else
         let jslconf = " -conf " . g:syntastic_jsl_conf
     endif
-    let makeprg = "jsl" . jslconf . " -nologo -nofilelisting -nosummary -nocontext -process ".shellescape(expand('%'))
-    let errorformat='%W%f(%l): lint warning: %m,%-Z%p^,%W%f(%l): warning: %m,%-Z%p^,%E%f(%l): SyntaxError: %m,%-Z%p^,%-G'
+    let makeprg = "jslint ".shellescape(expand('%'))
+    let errorformat='%f:%l:%c: %m'
     return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
 endfunction
