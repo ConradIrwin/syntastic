@@ -24,6 +24,7 @@ CONTENTS                                                  *syntastic-contents*
         2.1.The statusline flag...............|syntastic-statusline-flag|
         2.2.Error signs.......................|syntastic-error-signs|
         2.3.Error window......................|syntastic-error-window|
+        2.4.Error reporting...................|syntastic-error-echo|
     3.Commands................................|syntastic-commands|
     4.Options.................................|syntastic-options|
     5.Writing syntax checkers.................|syntastic-syntax-checkers|
@@ -106,6 +107,13 @@ in the |location-list|.
 Note that when you use :Errors, the current location list is overwritten with
 Syntastic's own location list.
 
+------------------------------------------------------------------------------
+2.4. Error reporting                                   *syntastic-error-report*
+
+Syntastic uses the |:echo| command to report the error message associated with
+that line at the bottom of your screen. To enable this feature, use the
+|'syntastic_enable_report'| option.
+
 
 ==============================================================================
 3. Commands                                               *syntastic-commands*
@@ -126,6 +134,13 @@ Syntastic's own location list.
 Use this option to tell syntastic to use the |:sign| interface to mark syntax
 errors: >
     let g:syntastic_enable_signs=1
+<
+
+                                                   *'syntastic_enable_report'*
+Enable this option if you want syntastic to automatically report the error or
+warning emitted by your compiler when you move your cursor onto a problematic
+line.
+    let g:syntastic_enable_report=1
 <
 
                                                        *'syntastic_auto_jump'*

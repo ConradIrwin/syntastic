@@ -23,6 +23,10 @@ if !exists("g:syntastic_enable_signs") || !has('signs')
     let g:syntastic_enable_signs = 0
 endif
 
+if !exists("g:syntastic_enable_report")
+    let g:syntastic_enable_report=0
+endif
+
 if !exists("g:syntastic_auto_loc_list")
     let g:syntastic_auto_loc_list = 0
 endif
@@ -76,7 +80,35 @@ function! s:UpdateErrors()
             lclose
         endif
     endif
+
+    call s:EchoMessage()
 endfunction
+
+autocmd cursormoved,cursormovedi * call s:EchoMessage()
+function! s:EchoMessage()
+    if g:syntastic_enable_report && s:BufHasErrorsOrWarningsToDisplay()
+        let cur_line = line(".")
+        let cur_buf  = bufnr("%")
+        let error = ""
+        for item in b:syntastic_loclist
+            if item['lnum'] == cur_line && item['bufnr'] == cur_buf
+                let error = item['text']
+                break
+            endif
+        endfor
+        call s:WideMsg(error)
+    endif
+endfunction
+
+" From https://github.com/hallettj/jslint.vim/blob/master/ftplugin/javascript/jslint.vim
+" Echos a message with no 'Press Enter to Continue'
+function! s:WideMsg(msg)
+    let x=&ruler | let y=&showcmd
+    set noruler noshowcmd
+    redraw
+    echo a:msg
+    let &ruler=x | let &showcmd=y
+endfun
 
 "detect and cache all syntax errors in this buffer
 "
