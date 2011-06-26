@@ -106,7 +106,9 @@ function! s:WideMsg(msg)
     let x=&ruler | let y=&showcmd
     set noruler noshowcmd
     redraw
-    echo a:msg
+
+    " Remove random whitespace (particularly newlines!)
+    echo substitute(a:msg, '\_s\+', ' ', 'g')
     let &ruler=x | let &showcmd=y
 endfun
 
