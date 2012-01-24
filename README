@@ -1,0 +1,5 @@
+This is an unofficial, and old version of syntastic with hacks to make it work for me
+better.
+
+I suggest you use the official version from https://github.com/scrooloose/syntastic, it
+has ASCII art in its README and everything
