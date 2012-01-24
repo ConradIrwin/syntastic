@@ -29,7 +29,7 @@ function! SyntaxCheckers_javascript_GetLocList()
     else
         let jslconf = " -conf " . g:syntastic_jsl_conf
     endif
-    let makeprg = "jslint ".shellescape(expand('%'))
-    let errorformat='%f:%l:%c: %m'
+    let makeprg = "jslint --no-context ".shellescape(expand('%'))
+    let errorformat='%f:%l character %c: %m'
     return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
 endfunction
