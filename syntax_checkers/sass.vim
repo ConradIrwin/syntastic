@@ -9,6 +9,7 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "
 "============================================================================
+finish
 if exists("loaded_sass_syntax_checker")
     finish
 endif
